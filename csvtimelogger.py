@@ -79,7 +79,8 @@ class CsvTimeLogger:
             return df
         df['times'] = df.apply(self.time_diff, axis=1)
         # group by date and sum times for each date
-        df_dates = df.groupby(lambda x: df['start'].loc[x].date()).sum()
+        df['start_date'] = df['start'].apply(lambda x: x.date())
+        df_dates = df[['start_date', 'times']].groupby(['start_date']).sum()
         if not include_today and dt.date.today() in df_dates.index:
             df_dates.drop(dt.date.today(), inplace=True)
         return df_dates.apply(lambda x: x['times'] - dt.timedelta(hours=self._hours_per_day), axis=1)
