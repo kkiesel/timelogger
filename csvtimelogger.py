@@ -17,10 +17,11 @@ class CsvTimeLogger:
         return dt.datetime.now() - x['start'] if pd.isnull(x['stop']) else x['stop'] - x['start']
 
     def update(self):
-        self._df = pd.read_csv(self._log_file_name, parse_dates=[0, 1])
+        self._df = pd.read_csv(self._log_file_name, parse_dates=[0, 1]).sort_values('start', ascending=True)
 
     def update_csv(self):
-        self._df.to_csv(self._log_file_name, index=False)
+        self._df.start = pd.to_datetime(self._df.start)
+        self._df.sort_values('start', ascending=False).to_csv(self._log_file_name, index=False)
 
     def __init__(self, log_file_name=r'time_log.csv', hours_per_day=8):
         self._log_file_name = log_file_name
