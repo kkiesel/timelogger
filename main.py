@@ -19,7 +19,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.start and args.stop:
-        raise Exception('Either start or stop, you should not do both!')
+        raise NotImplementedError('Either start or stop, you should not do both!')
 
     if args.stop:
         wtl = CsvTimeLogger(args.log_file_name, args.hours_per_day)
