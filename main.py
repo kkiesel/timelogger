@@ -3,6 +3,7 @@
 
 import wx
 from argparse import ArgumentParser
+from pathlib import Path
 
 from csvtimelogger import CsvTimeLogger
 from gui import TimeLoggerFrame
@@ -13,7 +14,7 @@ if __name__ == '__main__':
     parser = ArgumentParser("Record worked time")
     parser.add_argument("--start", action='store_true')
     parser.add_argument("--stop", action='store_true')
-    parser.add_argument('--log_file_name', default='time_log.csv')
+    parser.add_argument('--log_file_name', default=Path.home() / 'time_log.csv')
     parser.add_argument('--hours_per_day', default=8, type=int)
     args = parser.parse_args()
 
