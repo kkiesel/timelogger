@@ -30,9 +30,14 @@ class CsvTimeLogger:
             with open(self._log_file_name, 'w') as f:
                 f.write('start,stop')
 
+    @property
+    def log_file_name(self):
+        return str(self._log_file_name)
+
     def start_time(self):
         self.update()
-        self._df = self._df.append({'start': dt.datetime.now().strftime(self._time_format), 'stop': ''}, ignore_index=True)
+        start_time_str = dt.datetime.now().strftime(self._time_format)
+        self._df = self._df.append({'start': start_time_str, 'stop': ''}, ignore_index=True)
         self.update_csv()
 
     def stop_time(self):

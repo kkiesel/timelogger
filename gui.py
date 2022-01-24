@@ -14,7 +14,7 @@ def format_timedelta(td):
 
 
 def get_color_red_white_blue(v):
-    '''Return dark red (v=-1), light red (-1<v<0) white (v=0), light blue (0<v<1) and dark blue (v=1)'''
+    """Return dark red (v=-1), light red (-1<v<0) white (v=0), light blue (0<v<1) and dark blue (v=1)"""
     v = max(min(v, 1), -1)  # constrains v to be in [-1, 1]
     other_colors = int(255 * (1 - abs(v)))
     if v > 0:
@@ -70,8 +70,7 @@ class TimeLoggerFrame(wx.Frame):
         StatisticsFrame(self)
 
     def edit_log_file(self, event):
-        subprocess.call(['notepad', self.wtl._log_file_name])
-        #subprocess.call([r'C:\Programme\NOTEPAD++\notepad++.exe', self.wtl._log_file_name])
+        subprocess.call(['notepad', self.wtl.log_file_name])
 
     def update_texts(self, event=None):
         self.working_now = self.wtl.is_working_now()
