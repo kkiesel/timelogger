@@ -4,6 +4,7 @@ import datetime as dt
 import wx
 import wx.grid
 import pandas as pd
+from pathlib import Path
 import subprocess
 from csvtimelogger import CsvTimeLogger
 
@@ -29,6 +30,7 @@ class TimeLoggerFrame(wx.Frame):
 
     def __init__(self, log_file_name, hours_per_day):
         wx.Frame.__init__(self, None, title='WorkTime')
+        self.SetIcon(wx.Icon(str(Path(__file__).parent / 'clock.ico')))
         self.wtl = CsvTimeLogger(log_file_name, hours_per_day)
         self.working_now = self.wtl.is_working_now()
         self.panel = wx.Panel(self)
